@@ -10,6 +10,7 @@ import { propertyApiAdapter } from "@/infra/api/propertyApiAdapter";
 import Modal from "../common/Modal";
 import PropertyForm from "./PropertyForm";
 import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
+import { FaArrowRotateRight } from "react-icons/fa6";
 
 interface Props {
   data: Property[];
@@ -62,7 +63,15 @@ export default function PropertyList({ data, loading, error, load, filters, tota
     <div>
       {/* Controles */}
       <div className="flex justify-between items-center mb-4">
-        <SortDropdown onSort={handleSort} />
+       <div>
+          <SortDropdown onSort={handleSort} />
+          <button
+            className="btn btn-secondary"
+            onClick={() => window.location.reload()}
+          >
+            <FaArrowRotateRight />
+          </button>
+        </div>
         <Pagination
           page={filters.page ?? 1}
           totalPages={totalPages}
@@ -101,7 +110,7 @@ export default function PropertyList({ data, loading, error, load, filters, tota
                   <FaEdit size={20} />
                 </button>
                 <button
-                  className="btn btn-sm btn-white btn-outline border-none absolute right-6 bottom-32"
+                  className="btn btn-sm btn-white btn-outline border-none"
                   onClick={() => handleDeleteClick(p.id!)}
                 >
                   <FaTrash size={20} />

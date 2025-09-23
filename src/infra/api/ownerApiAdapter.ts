@@ -1,7 +1,7 @@
 import { type Owner } from "@/domain/entities/Owner";
 
 import { api } from "./propertyApiAdapter";
-import type { OwnerRepository, PagedResult } from "@/domain/ports/OwnerRepository";
+import type { OwnerFilter, OwnerRepository, PagedResult } from "@/domain/ports/OwnerRepository";
 
 
 // Normaliza el objeto Owner
@@ -17,10 +17,10 @@ function mapOwner(raw: Owner): Owner {
 
 // Implementación uniforme del repositorio
 export const ownerApiAdapter: OwnerRepository = {
-  async fetchAll(): Promise<PagedResult<Owner>> {
-    const resp = await api.get("/owners");
+  async fetchAll(filters?: OwnerFilter): Promise<PagedResult<Owner>> {
+    const resp = await api.get("/owners", { params: filters });
     return {
-      data: resp.data.map(mapOwner),
+      data: resp.data.data.map(mapOwner),
       totalCount: resp.data.totalCount,
       totalPages: resp.data.totalPages,
     };

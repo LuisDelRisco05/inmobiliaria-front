@@ -51,7 +51,7 @@ export function useFetchOwners(initialFilters?: PropertyFilter) {
   );
 
   useEffect(() => {
-    load();
+    load(filters);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -63,6 +63,7 @@ export function useFetchOwners(initialFilters?: PropertyFilter) {
     setOwners,
     totalCount,
     totalPages,
-    filters
+    filters,
+    setFilters
   };
 }

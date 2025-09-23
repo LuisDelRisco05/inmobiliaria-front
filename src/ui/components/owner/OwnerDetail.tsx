@@ -23,7 +23,7 @@ export default function OwnerDetail() {
     setLoading(true);
     try {
       const res = await ownerApiAdapter.fetchAll();
-      const match = res.find((o) => o.id === id);
+      const match = res.data.find((o) => o.id === id);
       if (!match) {
         setError("Propietario no encontrado");
       } else {
@@ -61,10 +61,11 @@ export default function OwnerDetail() {
       <img
         src={owner.photo}
         alt={owner.name}
+        loading="lazy"
         onError={(e) => {
           (e.currentTarget as HTMLImageElement).src = "https://hackmd.io/_uploads/SkmfOYJ3ll.png";
         }}
-        className="w-full h-80 object-cover rounded-xl"
+        className="w-full h-80 object-cover rounded-xln"
       />
       <p className="text-sm font-semibold mt-4">Dirección:</p>
       <p className="mb-3">{owner.address}</p>

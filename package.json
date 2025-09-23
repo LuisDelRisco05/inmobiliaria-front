@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "jest --config jest.config.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.13",
@@ -21,14 +22,22 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.35.0",
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/jest": "^30.0.0",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
+    "@types/testing-library__react": "^10.0.1",
     "@vitejs/plugin-react": "^5.0.2",
     "daisyui": "^5.1.13",
     "eslint": "^9.35.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.4.0",
+    "jest": "^30.1.3",
+    "jest-environment-jsdom": "^30.1.2",
+    "ts-jest": "^29.4.4",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.43.0",
     "vite": "^7.1.6",
