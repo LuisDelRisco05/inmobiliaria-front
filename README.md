@@ -23,4 +23,15 @@ Permite listar, filtrar y administrar propiedades y propietarios conectados a un
 ```bash
 git clone https://github.com/LuisDelRisco05/inmobiliaria-front
 cd million-frontend
+## Instalar dependencias
+npm i
+## Variables de entorno
+.env VITE_API_URL=http://localhost:5000/api
+## Arrcancar proyecto
 npm run dev
+## Test
+npm run test
+## Base de datos con Docker
+docker run -d --name million-mongo -p 27017:27017 mongo:6
+## Conexión a Mongo Compass 
+mongodb://localhost:27017
