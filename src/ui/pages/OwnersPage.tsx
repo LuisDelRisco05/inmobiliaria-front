@@ -19,6 +19,7 @@ export default function OwnersPage() {
       {/* Botón flotante para crear nuevo propietario */}
       <button
         data-tip="Agregar propietario"
+        data-testid="btn-add-owner"
         className="btn btn-circle btn-secondary fixed bottom-20 right-6 shadow-lg tooltip tooltip-left tooltip-secondary z-50"
         onClick={() => ownerModalRef.current?.open()}
       >
@@ -28,6 +29,7 @@ export default function OwnersPage() {
       {/* Botón flotante de filtros */}
       <button
         data-tip="Filtrar propietarios"
+        data-testid="btn-filter-owner"
         className="btn btn-circle btn-primary fixed bottom-6 right-6 shadow-lg tooltip tooltip-left tooltip-primary z-50"
         onClick={() => filterModalRef.current?.open()}
       >
@@ -41,6 +43,8 @@ export default function OwnersPage() {
       >
         <Link
           to="/"
+          aria-label="Volver a propiedades"
+          data-testid="link-to-properties"
           className="btn btn-circle bg-secondary hover:bg-secondary-focus text-white shadow-lg"
         >
           🏡

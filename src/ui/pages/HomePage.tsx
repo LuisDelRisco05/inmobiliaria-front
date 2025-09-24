@@ -20,6 +20,7 @@ export default function HomePage() {
       {/* Botón flotante de filtros */}
       <button
         data-tip="Filtrar propiedades"
+        data-testid="filter-btn"
         className="btn btn-circle btn-primary fixed bottom-6 right-6 shadow-lg tooltip tooltip-left tooltip-primary z-50"
         onClick={() => filterModalRef.current?.open()}
       >
@@ -29,6 +30,7 @@ export default function HomePage() {
       {/* Botón flotante de nueva propiedad */}
       <button
         data-tip="Agregar propiedad"
+        data-testid="add-property-btn"
         className="btn btn-circle btn-secondary fixed bottom-20 right-6 shadow-lg tooltip tooltip-left tooltip-secondary z-50"
         onClick={() => propertyModalRef.current?.open()}
       >

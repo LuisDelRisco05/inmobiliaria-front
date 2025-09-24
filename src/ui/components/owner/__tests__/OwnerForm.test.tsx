@@ -34,10 +34,18 @@ describe("OwnerForm", () => {
     render(<OwnerForm />);
     fireEvent.click(screen.getByRole("button", { name: /crear/i }));
 
-    expect(await screen.findByText(/El nombre es obligatorio/i)).toBeInTheDocument();
-    expect(await screen.findByText(/La dirección es obligatoria/i)).toBeInTheDocument();
-    expect(await screen.findByText(/La foto es obligatoria/i)).toBeInTheDocument();
-    expect(await screen.findByText(/La fecha de nacimiento es obligatoria/i)).toBeInTheDocument();
+    expect(
+      await screen.findByText(/El nombre es obligatorio/i)
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText(/La dirección es obligatoria/i)
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText(/La foto es obligatoria/i)
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText(/La fecha de nacimiento es obligatoria/i)
+    ).toBeInTheDocument();
   });
 
   it("crea un owner cuando no hay initialData", async () => {
@@ -46,10 +54,18 @@ describe("OwnerForm", () => {
     const onCreated = jest.fn();
     render(<OwnerForm onCreated={onCreated} />);
 
-    fireEvent.change(screen.getByPlaceholderText("Nombre"), { target: { value: "Luis" } });
-    fireEvent.change(screen.getByPlaceholderText("Dirección"), { target: { value: "Calle 123" } });
-    fireEvent.change(screen.getByPlaceholderText("URL de la foto"), { target: { value: "http://foto.com/img.jpg" } });
-    fireEvent.change(screen.getByLabelText(/fecha de nacimiento/i), { target: { value: "1990-01-01" } });
+    fireEvent.change(screen.getByPlaceholderText("Nombre"), {
+      target: { value: "Luis" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Dirección"), {
+      target: { value: "Calle 123" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("URL de la foto"), {
+      target: { value: "http://foto.com/img.jpg" },
+    });
+    fireEvent.change(screen.getByLabelText(/fecha de nacimiento/i), {
+      target: { value: "1990-01-01" },
+    });
 
     fireEvent.click(screen.getByRole("button", { name: /crear/i }));
 
@@ -58,7 +74,7 @@ describe("OwnerForm", () => {
         name: "Luis",
         address: "Calle 123",
         photo: "http://foto.com/img.jpg",
-        birthday: "01-01-1990",
+        birthday: "1990-01-01",
       });
       expect(onCreated).toHaveBeenCalled();
       expect(mockShowAlert).toHaveBeenCalledWith(
@@ -70,31 +86,42 @@ describe("OwnerForm", () => {
   });
 
   it("edita un owner cuando hay initialData", async () => {
-    (ownerApiAdapter.update as jest.Mock).mockResolvedValueOnce({});
-
     const onUpdated = jest.fn();
     const onClose = jest.fn();
-    const initialData = {
-      id: "1",
-      name: "Ana",
-      address: "Av. 456",
-      photo: "http://img.com/old.jpg",
-      birthday: new Date("2000-01-01"),
-    };
 
-    render(<OwnerForm initialData={initialData} onUpdated={onUpdated} onClose={onClose} />);
+    render(
+      <OwnerForm
+        initialData={{
+          id: "1",
+          name: "Ana",
+          address: "Calle X",
+          photo: "http://old.jpg",
+          birthday: "1990-01-01",
+        }}
+        onUpdated={onUpdated}
+        onClose={onClose}
+      />
+    );
 
-    expect(screen.getByDisplayValue("Ana")).toBeInTheDocument();
+    // 👇 espera a que el input esté poblado con "Ana"
+    const nameInput = await screen.findByDisplayValue("Ana");
 
-    fireEvent.change(screen.getByPlaceholderText("Nombre"), { target: { value: "Ana María" } });
-    fireEvent.click(screen.getByRole("button", { name: /crear/i }));
+    // Cambia nombre
+    fireEvent.change(nameInput, { target: { value: "Ana María" } });
 
+    // Enviar formulario
+    fireEvent.click(screen.getByRole("button", { name: /actualizar/i }));
+
+    // Validaciones
     await waitFor(() => {
-      expect(ownerApiAdapter.update).toHaveBeenCalledWith("1", expect.objectContaining({ name: "Ana María" }));
+      expect(ownerApiAdapter.update).toHaveBeenCalledWith(
+        "1",
+        expect.objectContaining({ name: "Ana María" })
+      );
       expect(onUpdated).toHaveBeenCalled();
       expect(onClose).toHaveBeenCalledWith(null);
       expect(mockShowAlert).toHaveBeenCalledWith(
-        "Propiedad actualizada con éxito!",
+        "Propietario actualizado con éxito!",
         "success",
         5000
       );
@@ -102,13 +129,23 @@ describe("OwnerForm", () => {
   });
 
   it("muestra alerta de error si la API falla", async () => {
-    (ownerApiAdapter.create as jest.Mock).mockRejectedValueOnce(new Error("fail"));
+    (ownerApiAdapter.create as jest.Mock).mockRejectedValueOnce(
+      new Error("fail")
+    );
 
     render(<OwnerForm />);
-    fireEvent.change(screen.getByPlaceholderText("Nombre"), { target: { value: "Luis" } });
-    fireEvent.change(screen.getByPlaceholderText("Dirección"), { target: { value: "Calle 123" } });
-    fireEvent.change(screen.getByPlaceholderText("URL de la foto"), { target: { value: "http://foto.com/img.jpg" } });
-    fireEvent.change(screen.getByLabelText(/fecha de nacimiento/i), { target: { value: "1990-01-01" } });
+    fireEvent.change(screen.getByPlaceholderText("Nombre"), {
+      target: { value: "Luis" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Dirección"), {
+      target: { value: "Calle 123" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("URL de la foto"), {
+      target: { value: "http://foto.com/img.jpg" },
+    });
+    fireEvent.change(screen.getByLabelText(/fecha de nacimiento/i), {
+      target: { value: "1990-01-01" },
+    });
 
     fireEvent.click(screen.getByRole("button", { name: /crear/i }));
 

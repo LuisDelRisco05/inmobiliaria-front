@@ -8,7 +8,7 @@ type OwnerFormInputs = {
   name: string;
   address: string;
   photo: string;
-  birthday: Date;
+  birthday: Date | string;
 };
 
 interface Props {
@@ -46,7 +46,7 @@ export default function OwnerForm({ initialData, onCreated, onUpdated, onClose }
         await ownerApiAdapter.update(initialData.id, data);
         onUpdated?.();
         onClose?.(null);
-        showAlert("Propiedad actualizada con éxito!", "success", 5000);
+        showAlert("Propietario actualizado con éxito!", "success", 5000);
       } else {
         const { name, address, photo, birthday } = data;
         await ownerApiAdapter.create({ name, address, photo, birthday });
@@ -65,7 +65,7 @@ export default function OwnerForm({ initialData, onCreated, onUpdated, onClose }
       onSubmit={handleSubmit(onSubmit)}
       className="space-y-4 p-4 bg-base-200 rounded-xl shadow-md"
     >
-      <h2 className="text-xl font-bold">Agregar Propietario</h2>
+      <h2 className="text-xl font-bold">{initialData ? "Editar Propietario" : "Agregar Propietario"}</h2>
 
       <input
         type="text"
@@ -100,7 +100,7 @@ export default function OwnerForm({ initialData, onCreated, onUpdated, onClose }
       {errors.birthday && <p className="text-error">{errors.birthday.message}</p>}
 
       <button type="submit" disabled={isSubmitting} className="btn btn-primary w-full">
-        {isSubmitting ? "Guardando..." : "Crear"}
+        {isSubmitting ? "Guardando..." : initialData ? "Actualizar" : "Crear"}
       </button>
     </form>
   );

@@ -3,5 +3,5 @@ export type Owner = {
   name: string;
   address: string;
   photo: string;
-  birthday: Date;
+  birthday: Date | string;
 };
