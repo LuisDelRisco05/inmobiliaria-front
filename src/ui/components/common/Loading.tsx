@@ -25,7 +25,7 @@ const Loading: React.FC<LoadingProps> = ({
 
   return (
     <div className={containerClass}>
-      <span className={`loading ${typeClass} loading-${size} text-${color}`}></span>
+      <span data-testid="spinner"  className={`loading ${typeClass} loading-${size} text-${color}`}></span>
     </div>
   );
 };

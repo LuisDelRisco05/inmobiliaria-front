@@ -17,9 +17,9 @@ type PropertyFormInputs = {
 };
 
 interface Props {
-  initialData?: Property;       // <- si viene, es edición
-  onCreated?: () => void;       // callback al crear
-  onUpdated?: () => void;       // callback al editar
+  initialData?: Property; 
+  onCreated?: () => void;  
+  onUpdated?: () => void;  
 }
 
 export default function PropertyForm({ initialData, onCreated, onUpdated }: Props) {
@@ -111,6 +111,7 @@ export default function PropertyForm({ initialData, onCreated, onUpdated }: Prop
       {/* 🔹 Select de Owners */}
       <select
         className="select select-bordered w-full"
+        defaultValue={initialData?.idOwner ?? ""}
         {...register("idOwner", { required: "El propietario es obligatorio" })}
       >
         <option value="">Selecciona un propietario</option>

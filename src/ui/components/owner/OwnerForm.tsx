@@ -93,6 +93,7 @@ export default function OwnerForm({ initialData, onCreated, onUpdated, onClose }
 
       <input
         type="date"
+        aria-label="Fecha de nacimiento"
         className="input input-bordered w-full"
         {...register("birthday", { required: "La fecha de nacimiento es obligatoria" })}
       />

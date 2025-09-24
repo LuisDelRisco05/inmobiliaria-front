@@ -100,16 +100,18 @@ export default function PropertyList({ data, loading, error, load, filters, tota
                 ${p.price.toLocaleString()}
               </p>
               <div className="flex justify-between mt-2 gap-2">
-                <Link to={`/properties/${p.id}`} className="btn btn-sm btn-white btn-outline border-none">
+                <Link title="Ver detalles" to={`/properties/${p.id}`} className="btn btn-sm btn-white btn-outline border-none">
                   <FaEye size={20} />
                 </Link>
                 <button
+                  title="Editar"
                   className="btn btn-sm btn-white btn-outline border-none"
                   onClick={() => setEditing(p)}
                 >
                   <FaEdit size={20} />
                 </button>
                 <button
+                  title="Eliminar"
                   className="btn btn-sm btn-white btn-outline border-none"
                   onClick={() => handleDeleteClick(p.id!)}
                 >

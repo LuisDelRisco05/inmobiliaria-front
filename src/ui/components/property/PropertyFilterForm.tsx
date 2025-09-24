@@ -19,12 +19,12 @@ export default function PropertyFilterForm({ onFilter, close }: { onFilter: (val
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
+    <form role="form" onSubmit={handleSubmit(onSubmit)} className="space-y-3">
       <input {...register("name")} placeholder="Nombre" className="input input-bordered w-full" />
       <input {...register("address")} placeholder="Dirección" className="input input-bordered w-full" />
       <div className="flex gap-2">
-        <input type="number" {...register("minPrice")} placeholder="Precio mínimo" className="input input-bordered w-1/2" />
-        <input type="number" {...register("maxPrice")} placeholder="Precio máximo" className="input input-bordered w-1/2" />
+        <input type="number" {...register("minPrice", { valueAsNumber: true })} placeholder="Precio mínimo" className="input input-bordered w-1/2" />
+        <input type="number" {...register("maxPrice", { valueAsNumber: true })} placeholder="Precio máximo" className="input input-bordered w-1/2" />
       </div>
       <div className="flex justify-between">
         <button type="submit" className="btn btn-primary">Aplicar</button>
